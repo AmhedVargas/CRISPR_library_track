@@ -67,7 +67,7 @@ shinyUI(
                  #mainPanel(
                  fluidRow(
                    h3("Browse your favorite location"),
-                   includeScript("https://igv.org/web/release/2.0.0/dist/igv.js"),
+                   includeScript("https://igv.org/web/release/2.10.5/dist/igv.js"),
                    includeHTML("www/igv.html"),
                    hr(),
                    # Listen for gene-coordinates messages

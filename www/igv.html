@@ -25,6 +25,15 @@
                     color: "#5c5cd6"
                 },
                 {
+                    name: "Alfaphold trace",
+                    type: "wig",
+                    format: "bigWig",                  
+                    url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/AF_confidence.bigwig",
+                    visibilityWindow: 5000,
+                    min: 0,
+                    max: 100
+                },
+                {
                     name: "Genes WS282",
                     displayMode: "EXPANDED",
                     order: 1,
@@ -38,10 +47,9 @@
                   name: "crRNA library",
                   url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed",
 		  indexURL: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed.idx",
-                  displayMode: "EXPANDED",
+                  displayMode: "SQUISHED",
 		  visibilityWindow: 5000,
                   autoHeight: true,
-		  color: "#A52A2A",
                   searchable: false 
                 }
             ]
