@@ -1,4 +1,4 @@
-########piRNAi library interface####
+########crRNA library interface####
 ###Amhed Vargas
 ###amhed.velazquez@kaust.edu.sa
 ###UI
@@ -10,6 +10,7 @@ library(ggvis)
 library(ggplot2)
 library(DT)
 library(shinyWidgets)
+library(base64enc)
 
 # Define User interface
 shinyUI(
@@ -35,6 +36,17 @@ shinyUI(
                      igv.visibilityChange()
                      });
                                  "),
+    ##Script to create Ape annotations based on 64 bytes encoding
+    tags$script('
+                     Shiny.addCustomMessageHandler("downloadApe64", function(b64) {
+                     const a = document.createElement("a");
+                     document.body.append(a);
+                     a.download = "oligo.gb";
+                     a.href = b64;
+                     a.click();
+                     a.remove();
+                    });
+                                 '),
     #Main tab pages
     navbarPage(
         ### Add action links to the tittle of piRNAi app

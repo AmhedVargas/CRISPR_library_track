@@ -1,0 +1,106 @@
+LOCUS     L22_plate1_1_GGTGTTCCAGATGATCCACG_OligoStructure     300bp ds-DNA     linear     20-Feb-2022
+DEFINITION     .
+ACCESSION     .
+VERSION     .
+SOURCE     .
+ORGANISM     C.elegans
+COMMENT     Plate: plate1
+COMMENT     Well: L22
+COMMENT     Spot: 1
+COMMENT     crRNA: GGTGTTCCAGATGATCCACG
+COMMENT     
+COMMENT     Note: sequence of homology arms might differ from endogenous sequence as some were modified to prevent CRISPR re-cuting or enzyme digestion
+COMMENT     Generated using wormbuilder.org
+COMMENT     ApEinfo:methylated:1
+FEATURES             Location/Qualifiers
+     primer_bind     1..20
+                          /locus_tag="Universal Primer"
+                          /ApEinfo_label="Universal Primer"
+                     /ApEinfo_fwdcolor="#66ffcb"
+                     /ApEinfo_revcolor="#ff2600"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     promoter        98..167
+                          /locus_tag="PCeN50-2"
+                          /ApEinfo_label="PCeN50-2"
+                     /ApEinfo_fwdcolor="#0f7ffe"
+                     /ApEinfo_revcolor="#346ee0"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     misc_feature    43..46
+                          /locus_tag="GG Overhang"
+                          /ApEinfo_label="GG Overhang"
+                     /ApEinfo_fwdcolor="#ffd478"
+                     /ApEinfo_revcolor="#ffd478"
+                     /ApEinfo_graphicformat="arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0"
+     misc_feature    255..258
+                          /locus_tag="GG Overhang(1)"
+                          /ApEinfo_label="GG Overhang"
+                     /ApEinfo_fwdcolor="#ffd478"
+                     /ApEinfo_revcolor="#ffd478"
+                     /ApEinfo_graphicformat="arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0"
+     misc_feature    188..210
+                          /locus_tag="crRNA scaffold + Term"
+                          /ApEinfo_label="crRNA scaffold + Term"
+                     /ApEinfo_fwdcolor="#fc6fce"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     misc_feature    169..187
+                          /locus_tag="Spacer"
+                          /ApEinfo_label="Spacer"
+                     /ApEinfo_fwdcolor="#7980ff"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     misc_feature    211..254
+                          /locus_tag="Left Homology"
+                          /ApEinfo_label="Left Homology"
+                     /ApEinfo_fwdcolor="#75d5ff"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     misc_feature    47..90
+                          /locus_tag="Right Homology"
+                          /ApEinfo_label="Right Homology"
+                     /ApEinfo_fwdcolor="#75d5ff"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     primer_bind     complement(281..300)
+                          /locus_tag="Universal Primer(1)"
+                          /ApEinfo_label="Universal Primer"
+                     /ApEinfo_fwdcolor="#14c0bd"
+                     /ApEinfo_revcolor="#ff7d78"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     misc_feature    260..265
+                          /locus_tag="BsaI"
+                          /ApEinfo_label="BsaI"
+                     /ApEinfo_fwdcolor="#fefc78"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0"
+     misc_feature    36..41
+                          /locus_tag="BsaI(1)"
+                          /ApEinfo_label="BsaI"
+                     /ApEinfo_fwdcolor="#fefc78"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0"
+     misc_feature    92..97
+                          /locus_tag="XbaI"
+                          /ApEinfo_label="XbaI"
+                     /ApEinfo_fwdcolor="#f1b1b4"
+                     /ApEinfo_revcolor="green"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     primer_bind     complement(266..280)
+                          /locus_tag="R12"
+                          /ApEinfo_label="R12"
+                     /ApEinfo_fwdcolor="#7ffe07"
+                     /ApEinfo_revcolor="#fb0106"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+     primer_bind     21..35
+                          /locus_tag="F10"
+                          /ApEinfo_label="F10"
+                     /ApEinfo_fwdcolor="#21fe80"
+                     /ApEinfo_revcolor="#fb0106"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
+ORIGIN
+     1 CTCACCGCTC TTGTAGCATG CGTCCGCACA AACCCGGTCT CtATTCGGAT CATCTGGAAC
+    61 ACCAGGAAAA CCTGGACTTC CAGGAAACGC TTCTAGActc ttgacactgg tggccttgcg
+   121 gttagcgcgt tcgattagcg tgccggcacc cactggttca attccctGGT GTTCCAGATG
+   181 ATCCACGgtt tgagagctag acggtttttt CTGAATGTCC AGGATGTTGC ATTCCAGGAC
+   241 CACCAGGTCC ACGTGGCTtG AGACCAAGCG AGAGGTGGCC CCAGGAAGAG ATTGCCGGTC
+//
