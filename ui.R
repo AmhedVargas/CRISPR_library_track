@@ -50,17 +50,18 @@ shinyUI(
     #Main tab pages
     navbarPage(
         ### Add action links to the tittle of piRNAi app
-        title=actionLink("link_to_tabpanel_title", HTML("<b>crRNA library</b>")),
-        windowTitle="crRNA library",
+        title=actionLink("link_to_tabpanel_title", HTML("<b><i>C. elegans</i> crRNA library</b>")),
+        windowTitle="C. elegans crRNA library",
         id = "panels",
         
         tabPanel("Query",
                  mainPanel(
-                     h2("Search for gene targets in our crRNA library"),
-                         tabPanel("Gene search",
+                     h2("Search for gene targets"),
+                     tabsetPanel(
+                         tabPanel("Simple search",
                                   br(),
                                   ##Basic search text
-                                  textAreaInput("geneinput", label = "Target gene", value = "", resize="none", placeholder= "WormbaseID, transcript or gene name", rows=1),
+                                  textAreaInput("geneinput", label = "Target gene", value = "", resize="none", placeholder= "Wormbase ID, transcript or gene name", rows=1),
                                   ##Basic search button
                                   actionButton("actiongenesearch", label = "Search"),
                                   hr(),
@@ -71,7 +72,25 @@ shinyUI(
                                   DT::dataTableOutput('SelPiTab'),
                                   htmlOutput("SelPiTabSummary"),
                                   uiOutput("extraoui")
-                         ))),
+                         ),
+                     
+                         tabPanel("Multiple search",
+                                 br(),
+                                 textAreaInput("MultipleGeness", placeholder = "Wormbase IDs, transcript or gene names separated by newlines or commas", label = "List of genes", value = "", cols= 100, rows=5, width = "600px"),
+                                 #selectInput("crRNA_multiplegenes_type", label = HTML("<b>crRNA type</b>"), 
+                                 #            choices = c("All","500 bp promoter", "250 bp promoter", "ATG", "CDS", "Stop"), 
+                                 #            selected = 1),
+                                 ##Basic search button
+                                 actionButton("actionmultiplesearch", label = "Search"),
+                                 hr(),
+                                 ##Error in case something fails
+                                 verbatimTextOutput("ErrorMessageMultiple"),
+                                 ##Basic table
+                                 DT::dataTableOutput('crRNAMultipleTab'),
+                                 htmlOutput("MultipleExtraoui"),
+                                )
+                     )
+                     )),
         
         
         ####Genome browser
@@ -97,6 +116,17 @@ shinyUI(
                  ##Basic table
                  DT::dataTableOutput('SelPiTabBrowser'),
                  )),
+        
+        ##Basket tab
+        tabPanel("Basket",
+                 mainPanel(
+                     h3("Download oligos in bulk"),
+                     DT::dataTableOutput('BigBasket'),
+                     ##Add a conditional panel with rv counter higher than 0 to add download button, alternatively associate that to the value # this option is better so
+                     uiOutput("DownloadBasket")
+                 )
+        ),
+        
         ##Download of tracks
         tabPanel("Downloads",
                  mainPanel(

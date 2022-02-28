@@ -17,15 +17,17 @@
                 {
                     name: "Genes",
                     displayMode: "EXPANDED",
-                    order: 1,
-                    url: "//s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/Celegans_LongGene.bed",
+                    order: 2,
+                    url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/Genes_WS282.bed",
                     indexed: false,
                     searchable: true,
-                    visibilityWindow: 10000,
-                    color: "#5c5cd6"
+                    visibilityWindow: 250000,
+                    color: "#2471A3",
+		    altColor: "#C0392B"
                 },
                 {
-                    name: "Alfaphold trace",
+                    name: "Alphafold confidence score",
+		    order: 1,
                     type: "wig",
                     format: "bigWig",                  
                     url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/AF_confidence.bigwig",
@@ -34,21 +36,23 @@
                     max: 100
                 },
                 {
-                    name: "Genes WS282",
+                    name: "Transcripts",
                     displayMode: "EXPANDED",
-                    order: 1,
+                    order: 3,
                     url: "//s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/c_elegans.WS282.WormBase.gff3",
                     indexURL: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/c_elegans.WS282.WormBase.gff3.idx",
                     searchable: true,
-                    visibilityWindow: 10000,
-                    color: "#5c5cd6"
+                    visibilityWindow: 250000,
+                    color: "#2471A3",
+		    altColor: "#C0392B"
                 },
                 {
                   name: "crRNA library",
+		  order: 4,
                   url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed",
 		  indexURL: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed.idx",
                   displayMode: "SQUISHED",
-		  visibilityWindow: 5000,
+		  visibilityWindow: 10000,
                   autoHeight: true,
                   searchable: false 
                 }
