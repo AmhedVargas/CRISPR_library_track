@@ -38,10 +38,14 @@ shinyUI(
                                  "),
     ##Script to create Ape annotations based on 64 bytes encoding
     tags$script('
-                     Shiny.addCustomMessageHandler("downloadApe64", function(b64) {
+                     Shiny.addCustomMessageHandler("downloadApe64", function(params) {
+                     var namas = params[0];
+                     var b64 = params[1];
                      const a = document.createElement("a");
                      document.body.append(a);
-                     a.download = "oligo.gb";
+                     //a.download = "oligo.gb";
+                     //a.download = b64.mime;
+                     a.download = namas;
                      a.href = b64;
                      a.click();
                      a.remove();

@@ -18,8 +18,11 @@ PiLib=read.table("DB/Lib_info_simplified.2.tsv",sep="\t",header=F, stringsAsFact
 colnames(PiLib)=c("Plate", "Well", "Pool", "Spot","PrimerOne","PrimerTwo","Gene","crRNA", "Type", "Oligo")
 
 #Main DB with names
-MainDB=read.table("DB/Main_DB.tsv",sep="\t",header=F, stringsAsFactors=F)
-colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
+MainDB=read.table("DB/Main_DB.2.tsv",sep="\t",header=F, stringsAsFactors=F)
+colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type","Name2Use")
+
+wbname=MainDB[,c("ID","Name2Use")]
+rownames(wbname)=as.character(wbname[,1])
 
   shinyServer(function(input, output, session) {
     
@@ -55,7 +58,7 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
     ###Test now functions for the creation of a basket
     rv <- reactiveValues(
       # And here is our main data frame
-      basket = data.frame(Plate = c(""), Well = c(""), PrimerFwd=c(""), PrimerRev=c(""), crRNA=c(""), Type=c(""), Oligo=c(""), stringsAsFactors=F), 
+      basket = data.frame(Plate = c(""), Well = c(""), PrimerFwd=c(""), PrimerRev=c(""), Target=c(""),crRNA=c(""), Type=c(""), Oligo=c(""), stringsAsFactors=F), 
       
       # And our counter
       counter = 0
@@ -112,6 +115,8 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       wbid=""
       mygene = as.character(input$geneinput)
       
+      if(mygene != ""){
+        
       if(mygene %in% as.character(MainDB$ID)){
         wbid=as.character(MainDB[which(as.character(MainDB$ID)==mygene)[1],1])
       }else{
@@ -124,7 +129,7 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
         }
         }
       }
-      
+      }
       if(wbid == ""){
         output$SelPiTabSummary <- renderUI({
           HTML("<b>Gene not found</b>")
@@ -148,16 +153,17 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
             Well = tmpL[,2],
             PrimerFwd = tmpL[,4],
             PrimerRev= tmpL[,5],
+            Target= wbname[as.character(tmpL[,6]),2],
             crRNA=tmpL[,7],
             Type=tmpL[,8],
-            Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
-            Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
+            Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(wbname[as.character(tmpL[,6]),2]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),"_",as.character(tmpL[,8]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
+            Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,6]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
             stringsAsFactors = FALSE
           )
           
           colnames(Pdata)[3]="Forward primer"
           colnames(Pdata)[4]="Reverse primer"
-          colnames(Pdata)[7]="Annotated oligo sequence (ApE)"
+          colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
           
           Pdata
           #},server = FALSE, escape = FALSE, selection = 'none'))
@@ -186,6 +192,7 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       if(length(mygenes) > 0){
         for(mygene in mygenes){
           
+          if(mygene != ""){
           if(mygene %in% as.character(MainDB$ID)){
             wbidsIN=append(wbidsIN,as.character(MainDB[which(as.character(MainDB$ID)==mygene)[1],1]))
             oriris=append(oriris,mygene)
@@ -204,6 +211,7 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
             }
           }
           
+            }
           }
       }
       
@@ -220,13 +228,13 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
         }
         
         tmpT=PiLib[which(as.character(PiLib$Gene) %in% wbidsIN[1]),]
-        tmpT$Gene = rep(oriris[1],nrow(tmpT))
+        #tmpT$Gene = rep(oriris[1],nrow(tmpT))
         
         tmpL = tmpT
         if(length(wbidsIN) > 1){
         for(q in 2:length(wbidsIN)){
           tmpT=PiLib[which(as.character(PiLib$Gene) %in% wbidsIN[q]),]
-          tmpT$Gene = rep(oriris[q],nrow(tmpT))
+          #tmpT$Gene = rep(oriris[q],nrow(tmpT))
           tmpL=rbind(tmpL,tmpT)
           }
         
@@ -242,11 +250,11 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
             Well = tmpL[,2],
             PrimerFwd = tmpL[,4],
             PrimerRev= tmpL[,5],
-            Target= tmpL[,6],
+            Target= wbname[as.character(tmpL[,6]),2],
             crRNA=tmpL[,7],
             Type=tmpL[,8],
-            Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
-            Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
+            Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(wbname[as.character(tmpL[,6]),2]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),"_",as.character(tmpL[,8]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
+            Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,6]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
             stringsAsFactors = FALSE
           )
           
@@ -288,7 +296,7 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
     
     ######################Functions to process oligos
     ##Make ape with oligo annotations
-    OligoApe = function(sequence, FwdPrimerN, RevPrimerN, crRNASeq, Plate, Well){
+    OligoApe = function(sequence, FwdPrimerN, RevPrimerN, crRNASeq, Plate, Well, Target){
       if (is.null(sequence)){return(NULL)}
       FileLines=c()
       ##Main definitions
@@ -303,9 +311,11 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       FileLines=append(FileLines,paste("COMMENT",paste("Plate:",as.character(Plate)),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste("Well:",as.character(Well)),sep="     "))
       #FileLines=append(FileLines,paste("COMMENT",paste("Spot:",as.character(Spot)),sep="     "))
+      FileLines=append(FileLines,paste("COMMENT",paste("Target:",as.character(Target)),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste("crRNA:",as.character(crRNASeq)),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste(),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste("Note: sequence of homology arms might differ from endogenous sequence as some were modified to prevent CRISPR re-cuting or enzyme digestion"),sep="     "))
+      FileLines=append(FileLines,paste("COMMENT",paste(),sep="     "))
       FileLines=append(FileLines,paste("COMMENT","Generated using wormbuilder.org",sep="     "))
       FileLines=append(FileLines,paste("COMMENT","ApEinfo:methylated:1",sep="     "))
       
@@ -320,8 +330,8 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff2600","\"",sep=""))
       FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
       FileLines=append(FileLines,paste("     promoter        ","98..167",sep=""))
-      FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","PCeN50-2","\"",sep="",collapse=""),sep="     "))
-      FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","PCeN50-2","\"",sep="",collapse=""),sep="     "))
+      FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Pol III promoter","\"",sep="",collapse=""),sep="     "))
+      FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Pol III promoter","\"",sep="",collapse=""),sep="     "))
       FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#0f7ffe","\"",sep=""))
       FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#346ee0","\"",sep=""))
       FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
@@ -459,16 +469,17 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
           Well = tmpL[,2],
           PrimerFwd = tmpL[,4],
           PrimerRev= tmpL[,5],
+          Target= wbname[as.character(tmpL[,6]),2],
           crRNA=tmpL[,7],
           Type=tmpL[,8],
-          Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button2\",  this.id.concat(\"_\", Math.random()))' ),
-          Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
+          Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(wbname[as.character(tmpL[,6]),2]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),"_",as.character(tmpL[,8]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
+          Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,6]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
           stringsAsFactors = FALSE
         )
         
         colnames(Pdata)[3]="Forward primer"
         colnames(Pdata)[4]="Reverse primer"
-        colnames(Pdata)[7]="Annotated oligo sequence (ApE)"
+        colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
         
         Pdata
       },server = FALSE, escape = FALSE, selection = 'none')
@@ -477,45 +488,23 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       
       })
     
+    
+    ##Observer of second output table
     observeEvent(input$select_button, {
+      
       selectedPlate <- as.character(strsplit(input$select_button, "_")[[1]][2])
       selectedWell <- as.character(strsplit(input$select_button, "_")[[1]][3])
       #selectedSpot <- as.character(strsplit(input$select_button, "_")[[1]][4])
       selectedFwdP <- as.character(strsplit(input$select_button, "_")[[1]][4])
       selectedRevP <- as.character(strsplit(input$select_button, "_")[[1]][5])
-      selectedSeq <- as.character(strsplit(input$select_button, "_")[[1]][6])
-      selectedOligo <- as.character(strsplit(input$select_button, "_")[[1]][7])
-      
-      tmpLines = OligoApe(selectedOligo, selectedFwdP, selectedRevP, selectedSeq, selectedPlate, selectedWell)
-      
-      writeLines(tmpLines,paste(UserPath,"oligo.gb",sep=""))
-      
-      outfile <- file.path(UserPath, "oligo.gb")
-      
-      b64 <- dataURI(
-        file = outfile, 
-        mime = "text/plain;charset=US-ASCII"
-      )
-      session$sendCustomMessage("downloadApe64", b64)
-      
-    })
-    
-    
-    
-    ##Observer of second output table
-    observeEvent(input$select_button2, {
-      
-      selectedPlate <- as.character(strsplit(input$select_button2, "_")[[1]][2])
-      selectedWell <- as.character(strsplit(input$select_button2, "_")[[1]][3])
-      #selectedSpot <- as.character(strsplit(input$select_button2, "_")[[1]][4])
-      selectedFwdP <- as.character(strsplit(input$select_button2, "_")[[1]][4])
-      selectedRevP <- as.character(strsplit(input$select_button2, "_")[[1]][5])
-      selectedSeq <- as.character(strsplit(input$select_button2, "_")[[1]][6])
-      selectedOligo <- as.character(strsplit(input$select_button2, "_")[[1]][7])
+      selectedTarget <- as.character(strsplit(input$select_button, "_")[[1]][6])
+      selectedSeq <- as.character(strsplit(input$select_button, "_")[[1]][7])
+      selectedOligo <- as.character(strsplit(input$select_button, "_")[[1]][8])
+      selectedType <- as.character(strsplit(input$select_button, "_")[[1]][9])
       
       #output$SimpleFragmentBrowser <- renderText({paste0(selectedSeq)})
       
-      tmpLines = OligoApe(selectedOligo, selectedFwdP, selectedRevP, selectedSeq, selectedPlate, selectedWell)
+      tmpLines = OligoApe(selectedOligo, selectedFwdP, selectedRevP, selectedSeq, selectedPlate, selectedWell, selectedTarget)
       
       writeLines(tmpLines,paste(UserPath,"oligo.gb",sep=""))
       
@@ -525,7 +514,11 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
         file = outfile, 
         mime = "text/plain;charset=US-ASCII"
       )
-      session$sendCustomMessage("downloadApe64", b64)
+      
+      fnamas=paste(paste(selectedPlate, selectedWell,selectedFwdP, selectedRevP, selectedTarget, selectedSeq, selectedType, collapse="", sep="_"),".gb",sep="")
+      
+      params=c(fnamas,b64)
+      session$sendCustomMessage("downloadApe64", params)
       
     })
     
@@ -537,11 +530,12 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       #selectedSpot <- as.character(strsplit(input$add_button2, "separator")[[1]][4])
       selectedFwdP <- as.character(strsplit(input$add_button2, "separator")[[1]][4])
       selectedRevP <- as.character(strsplit(input$add_button2, "separator")[[1]][5])
-      selectedSeq <- as.character(strsplit(input$add_button2, "separator")[[1]][6])
-      selectedType <- as.character(strsplit(input$add_button2, "separator")[[1]][7])
-      selectedOligo <- as.character(strsplit(input$add_button2, "separator")[[1]][8])
+      selectedTarget <- as.character(strsplit(input$add_button2, "separator")[[1]][6])
+      selectedSeq <- as.character(strsplit(input$add_button2, "separator")[[1]][7])
+      selectedType <- as.character(strsplit(input$add_button2, "separator")[[1]][8])
+      selectedOligo <- as.character(strsplit(input$add_button2, "separator")[[1]][9])
       
-      rv$basket <- rbind(rv$basket,c(selectedPlate,selectedWell,selectedFwdP,selectedRevP,selectedSeq,selectedType,selectedOligo))
+      rv$basket <- rbind(rv$basket,c(selectedPlate,selectedWell,selectedFwdP,selectedRevP,selectedTarget, selectedSeq,selectedType,selectedOligo))
       rv$counter <- rv$counter + 1
       
       showNotification(paste(selectedSeq, "was added to the basket"))
@@ -581,16 +575,17 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
           Well = dtt[,2],
           PrimerFwd = dtt[,3],
           PrimerRev= dtt[,4],
-          crRNA=dtt[,5],
-          Type=dtt[,6],
-          Oligo = shinyInput(actionButton, paste(as.character(dtt[,1]),"_",as.character(dtt[,2]),"_",as.character(dtt[,3]),"_",as.character(dtt[,4]),"_",as.character(dtt[,5]),"_",as.character(dtt[,7]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button2\",  this.id.concat(\"_\", Math.random()))' ),
+          Target= wbname[as.character(dtt[,5]),2],
+          crRNA=dtt[,6],
+          Type=dtt[,7],
+          Oligo = shinyInput(actionButton, paste(as.character(dtt[,1]),"_",as.character(dtt[,2]),"_",as.character(dtt[,3]),"_",as.character(dtt[,4]),"_",as.character(wbname[as.character(dtt[,5]),2]),"_",as.character(dtt[,6]),"_",as.character(dtt[,8]),"_",as.character(dtt[,7]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
           Remove = shinyInput(actionButton, paste("Basket_",as.character((1:nrow(dtt))+1),sep=""), 'button_', label = "Remove from basket", onclick = 'Shiny.onInputChange(\"remove_button\",  this.id.concat(\"_\", Math.random()))' ),
           stringsAsFactors = FALSE
         )
            
         colnames(Pdata)[3]="Forward primer"
         colnames(Pdata)[4]="Reverse primer"
-        colnames(Pdata)[7]="Annotated oligo sequence (ApE)"
+        colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
         
         rownames(Pdata)=1:nrow(Pdata)
         Pdata
@@ -609,7 +604,8 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
       content = function(file) {
         dtt=rv$basket
         dtt=dtt[-1,]
-        
+        ##Change names
+        dtt[,5]=as.character(wbname[as.character(dtt[,5]),2])
         fname = paste(UserPath,"Basket.tsv",sep="")
         write.table(x=dtt,fname,row.names=F,sep="\t")
         
@@ -629,9 +625,9 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type")
         fs <- c()
         fname = paste(UserPath,"Basket.zip",sep="")
         for(i in 1:nrow(dtt)){
-          tmpLines = OligoApe(dtt[i,7], dtt[i,3], dtt[i,4], dtt[i,5], dtt[i,1], dtt[i,2])
+          tmpLines = OligoApe(dtt[i,8], dtt[i,3], dtt[i,4], dtt[i,6], dtt[i,1], dtt[i,2],wbname[as.character(dtt[i,5]),2])
           ##Add type so files are not collapsed
-          ppath=paste(UserPath,paste(dtt[i,1], dtt[i,2],dtt[i,3], dtt[i,4], dtt[i,5], dtt[i,6], sep="_"),".gb",sep="")
+          ppath=paste(UserPath,paste(dtt[i,1], dtt[i,2],dtt[i,3], dtt[i,4], wbname[as.character(dtt[i,5]),2], dtt[i,6], dtt[i,7], sep="_"),".gb",sep="")
           writeLines(tmpLines,ppath)
           fs <- c(fs, ppath)
           }
