@@ -1,0 +1,88 @@
+<div id="myDiv" style="padding-top: 50px;padding-bottom: 20px; height: auto">
+</div>
+
+<script type="module">
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var div = document.getElementById("myDiv");
+        var options = {
+            reference: {
+                      id: "ce11",
+                      fastaURL: "//storage.googleapis.com/elegansvariation.org/browser_tracks/c_elegans.PRJNA13758.WS245.genomic.fa"
+                    },
+            locus: "II:6710150-6712932",
+            showNavigation: true,
+            showKaryo: false,
+            tracks: [
+                {
+                    name: "Genes",
+                    displayMode: "EXPANDED",
+                    order: 2,
+                    url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/Genes_WS282.bed",
+                    indexed: false,
+                    searchable: true,
+                    visibilityWindow: 250000,
+                    color: "#2471A3",
+		    altColor: "#C0392B"
+                },
+                {
+                    name: "Alphafold confidence score",
+		    order: 1,
+                    type: "wig",
+                    format: "bigWig",                  
+                    url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/AF_confidence.bigwig",
+                    visibilityWindow: 5000,
+                    min: 0,
+                    max: 100
+                },
+                {
+                    name: "Transcripts",
+                    displayMode: "EXPANDED",
+                    order: 3,
+                    url: "//s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/c_elegans.WS282.WormBase.gff3",
+                    indexURL: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/c_elegans.WS282.WormBase.gff3.idx",
+                    searchable: true,
+                    visibilityWindow: 250000,
+                    color: "#2471A3",
+		    altColor: "#C0392B"
+                },
+                {
+                  name: "crRNA library",
+		  order: 4,
+                  url: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed",
+		  indexURL: "https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed.idx",
+                  displayMode: "SQUISHED",
+		  visibilityWindow: 100000,
+                  autoHeight: true,
+                  searchable: false 
+                }
+            ]
+        };
+
+        igv.createBrowser(div, options)
+
+                        .then(function (browser) {
+
+
+                    browser.on('trackclick', function (track, popoverData) {
+                        var symbol = null;
+                        popoverData.forEach(function (nameValue) {
+                            if (nameValue.name && nameValue.name.toLowerCase() === 'name') {
+                                symbol = nameValue.value;
+                                Shiny.onInputChange("jsValue", symbol);
+                            }
+                        });
+
+                        // Prevent default pop-over behavior
+                         return false;
+
+
+                    });
+                
+
+
+
+                });
+
+    });
+</script>

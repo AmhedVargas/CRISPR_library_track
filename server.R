@@ -14,7 +14,7 @@ library(base64enc)
 
 ##Add info for database search
 #Library
-PiLib=read.table("DB/Lib_info_simplified.2.tsv",sep="\t",header=F, stringsAsFactors=F)
+PiLib=read.table("DB/Lib_info_simplified.tsv",sep="\t",header=F, stringsAsFactors=F)
 colnames(PiLib)=c("Plate", "Well", "Pool", "Spot","PrimerOne","PrimerTwo","Gene","crRNA", "Type", "Oligo")
 
 #Main DB with names
@@ -23,6 +23,10 @@ colnames(MainDB)=c("Accesion","ID","Locus","Transcript","Alias","Type","Name2Use
 
 wbname=MainDB[,c("ID","Name2Use")]
 rownames(wbname)=as.character(wbname[,1])
+
+##crRNA coordinates
+coordcrRNA = read.table("DB/crRNAlib.v3.simplified.bed",sep="\t", header=F, stringsAsFactors=F)
+colnames(coordcrRNA) = c("chr","midpos","seq")
 
   shinyServer(function(input, output, session) {
     
@@ -55,22 +59,27 @@ rownames(wbname)=as.character(wbname[,1])
     }
     
     
-    ###Test now functions for the creation of a basket
+    ###Test now functions for the creation of a basket and IGV location
     rv <- reactiveValues(
       # And here is our main data frame
       basket = data.frame(Plate = c(""), Well = c(""), PrimerFwd=c(""), PrimerRev=c(""), Target=c(""),crRNA=c(""), Type=c(""), Oligo=c(""), stringsAsFactors=F), 
       
       # And our counter
-      counter = 0
+      counter = 0,
+      
+      #and igv location
+      igvlox = ""
     )
     
     ##Make reactive stuff
     makeReactiveBinding("rv$basket")
     makeReactiveBinding("rv$counter")
+    makeReactiveBinding("rv$igvlox")
     
     ###Testsss
     rdf <- reactive(rv$basket)
     rdc <- reactive(rv$counter)
+    rdi <- reactive(rv$igvlox)
     
     ###Control panels functions##########################################################################################
     ##Functions needed to generate links between panels
@@ -163,6 +172,7 @@ rownames(wbname)=as.character(wbname[,1])
           
           colnames(Pdata)[3]="Forward primer"
           colnames(Pdata)[4]="Reverse primer"
+          colnames(Pdata)[6]="Guide sequence"
           colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
           
           Pdata
@@ -184,10 +194,14 @@ rownames(wbname)=as.character(wbname[,1])
       wbidsOut=c()
       oriris=c()
       
+      ##Genes
       mygenes = as.character(input$MultipleGeness)
       mygenes = gsub(" ", "", mygenes)
       mygenes = gsub("\n", ",", mygenes)
       mygenes = unlist(strsplit(mygenes,","))
+      
+      ##Type of crRNA
+      mytipin = as.character(input$crRNA_multiplegenes_type)
       
       if(length(mygenes) > 0){
         for(mygene in mygenes){
@@ -241,6 +255,23 @@ rownames(wbname)=as.character(wbname[,1])
         }
         
         tmpL=unique(tmpL[,-4])
+        
+        crRNAmatches=c()
+        
+        ##Now, filter by type
+        if(mytipin != "All"){
+        mycrRNAtypes= as.character(tmpL[,8])
+        crRNAmatches=grep(mytipin,mycrRNAtypes)
+        }else{
+          crRNAmatches=1:nrow(tmpL)
+          }
+        
+        ##
+        if(length(crRNAmatches) == 0){
+          output$ErrorMessageMultiple <- renderText({paste0("Some genes were found but there is no crRNA with the selected type. Try looking for all instead")})
+          output$crRNAMultipleTab=DT::renderDataTable({})
+          }else{
+            tmpL=tmpL[crRNAmatches,]    
         tmpL=tmpL[order(tmpL$Well),]
         tmpL=tmpL[order(tmpL$Plate),]
         
@@ -260,12 +291,13 @@ rownames(wbname)=as.character(wbname[,1])
           
           colnames(Pdata)[3]="Forward primer"
           colnames(Pdata)[4]="Reverse primer"
+          colnames(Pdata)[6]="Guide sequence"
           colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
           
           Pdata
           #},server = FALSE, escape = FALSE, selection = 'none'))
         },server = FALSE, escape = FALSE, selection = 'none')
-        
+          }
         }
 
     }, ignoreInit = T)
@@ -293,7 +325,6 @@ rownames(wbname)=as.character(wbname[,1])
     }, ignoreInit = T)
     
     
-    
     ######################Functions to process oligos
     ##Make ape with oligo annotations
     OligoApe = function(sequence, FwdPrimerN, RevPrimerN, crRNASeq, Plate, Well, Target){
@@ -312,9 +343,10 @@ rownames(wbname)=as.character(wbname[,1])
       FileLines=append(FileLines,paste("COMMENT",paste("Well:",as.character(Well)),sep="     "))
       #FileLines=append(FileLines,paste("COMMENT",paste("Spot:",as.character(Spot)),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste("Target:",as.character(Target)),sep="     "))
-      FileLines=append(FileLines,paste("COMMENT",paste("crRNA:",as.character(crRNASeq)),sep="     "))
+      FileLines=append(FileLines,paste("COMMENT",paste("Spacer:",as.character(crRNASeq)),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste(),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste("Note: sequence of homology arms might differ from endogenous sequence as some were modified to prevent CRISPR re-cuting or enzyme digestion"),sep="     "))
+      FileLines=append(FileLines,paste("COMMENT",paste("Also, the first nucleotide of the guide sequence has been changed into G to promote its transcription."),sep="     "))
       FileLines=append(FileLines,paste("COMMENT",paste(),sep="     "))
       FileLines=append(FileLines,paste("COMMENT","Generated using wormbuilder.org",sep="     "))
       FileLines=append(FileLines,paste("COMMENT","ApEinfo:methylated:1",sep="     "))
@@ -439,6 +471,125 @@ rownames(wbname)=as.character(wbname[,1])
     
     #######################FUnctions related to browser function
     #To do after first gui, basically copy and paste of info displayed after parsing
+    observeEvent(input$locationIGV, {
+      #cat(paste(input$locationIGV),sep="\n")
+      #writeLines(as.character(input$locationIGV),paste(UserPath,"lastlocation.txt",sep=""))
+      rv$igvlox <- as.character(input$locationIGV)
+      })
+    
+    
+    ##Observer for where I am in IGV browser
+    observeEvent(input$userigvlocation, {
+      #cat(rv$igvlox)
+      
+      tempis = unlist(strsplit(rv$igvlox,":"))
+      uschr = tempis[1]
+      
+      uspos = unlist(strsplit(tempis[2],"-"))
+      
+      ussta = as.integer(gsub(pattern="," , replacement="", x=uspos[1]))
+      usend = as.integer(gsub(pattern="," , replacement="", x=uspos[2]))
+      
+      tempos = which(coordcrRNA$chr %in% uschr)
+      
+      if(length(tempos) > 0){
+        tempta = coordcrRNA[tempos,]
+        tempos = which((tempta$midpos >= ussta) & (tempta$midpos <= usend))
+      }
+      
+      if(length(tempos) > 0){
+        tempseq = tempta[tempos,"seq"]
+        
+        idsss=which(as.character(PiLib$crRNA) %in% tempseq)
+        
+        #cat(paste(input$jsValue),sep="\n")
+        
+        #cat(paste(idsss),sep="\n")
+        
+        if(length(idsss) > 0){
+          
+          tmpL=PiLib[idsss,]
+          
+          tmpL=unique(tmpL[,-4])
+          tmpL=tmpL[order(tmpL$Well),]
+          tmpL=tmpL[order(tmpL$Plate),]
+          
+          
+          #output$SelPiTab<- DT::renderDataTable(tmpL)
+          
+          output$SelPiTabBrowser <- DT::renderDataTable({
+            Pdata=data.frame(
+              Plate = tmpL[,1],
+              Well = tmpL[,2],
+              PrimerFwd = tmpL[,4],
+              PrimerRev= tmpL[,5],
+              Target= wbname[as.character(tmpL[,6]),2],
+              crRNA=tmpL[,7],
+              Type=tmpL[,8],
+              Oligo = shinyInput(actionButton, paste(as.character(tmpL[,1]),"_",as.character(tmpL[,2]),"_",as.character(tmpL[,4]),"_",as.character(tmpL[,5]),"_",as.character(wbname[as.character(tmpL[,6]),2]),"_",as.character(tmpL[,7]),"_",as.character(tmpL[,9]),"_",as.character(tmpL[,8]),sep=""), 'button_', label = "Download genbank", onclick = 'Shiny.onInputChange(\"select_button\",  this.id.concat(\"_\", Math.random()))' ),
+              Save = shinyInput(actionButton, paste(as.character(tmpL[,1]),"separator",as.character(tmpL[,2]),"separator",as.character(tmpL[,4]),"separator",as.character(tmpL[,5]),"separator",as.character(tmpL[,6]),"separator",as.character(tmpL[,7]),"separator",as.character(tmpL[,8]),"separator",as.character(tmpL[,9]),sep=""), 'buttonseparator', label = "Add to basket", onclick = 'Shiny.onInputChange(\"add_button2\",  this.id)' ),
+              stringsAsFactors = FALSE
+            )
+            
+            colnames(Pdata)[3]="Forward primer"
+            colnames(Pdata)[4]="Reverse primer"
+            colnames(Pdata)[6]="Guide sequence"
+            colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
+            
+            Pdata
+          },server = FALSE, escape = FALSE, selection = 'none')
+        }
+        
+      }else{
+        ##Render no sequences here
+        output$ErrorMessageBrowser <- renderText({paste("There is not a single guide sequence in this location.")})
+        output$SelPiTabBrowser <- DT::renderDataTable({})
+        }
+      
+    }, ignoreInit = T)
+    
+    
+    ##Add to browser IGV location
+    ##Observer for where I am in IGV browser
+    observeEvent(input$userigvbasket, {
+      ##Same as before
+      tempis = unlist(strsplit(rv$igvlox,":"))
+      uschr = tempis[1]
+      uspos = unlist(strsplit(tempis[2],"-"))
+      ussta = as.integer(gsub(pattern="," , replacement="", x=uspos[1]))
+      usend = as.integer(gsub(pattern="," , replacement="", x=uspos[2]))
+      tempos = which(coordcrRNA$chr %in% uschr)
+      if(length(tempos) > 0){
+        tempta = coordcrRNA[tempos,]
+        tempos = which((tempta$midpos >= ussta) & (tempta$midpos <= usend))
+      }
+      if(length(tempos) > 0){
+        tempseq = tempta[tempos,"seq"]
+        idsss=which(as.character(PiLib$crRNA) %in% tempseq)
+        if(length(idsss) > 0){
+          tmpL=PiLib[idsss,]
+          tmpL=unique(tmpL[,-4])
+          tmpL=tmpL[order(tmpL$Well),]
+          tmpL=tmpL[order(tmpL$Plate),]
+          
+          tmpsequs = cbind(tmpL[,1],tmpL[,2],tmpL[,4],tmpL[,5],tmpL[,6],tmpL[,7],tmpL[,8],tmpL[,9])
+          
+          colnames(tmpsequs) = colnames(rv$basket)
+          
+          rv$basket <- rbind(rv$basket,tmpsequs)
+          rv$counter <- rv$counter + nrow(tmpsequs)
+          
+          showNotification(paste(nrow(tmpsequs), "sequences were added to the basket"))
+        }
+
+      }else{
+        ##Render no sequences here
+        output$ErrorMessageBrowser <- renderText({paste("There is not a single guide sequence to add to basket")})
+        output$SelPiTabBrowser <- DT::renderDataTable({})
+      }
+      
+    }, ignoreInit = T)
+    
     
     ##Observe Js value
     observeEvent(input$jsValue, {
@@ -453,8 +604,16 @@ rownames(wbname)=as.character(wbname[,1])
       message=as.character(input$jsValue)
       
       seq=unlist(strsplit(message,";"))[4]
+      
+      idsss=which(as.character(PiLib$crRNA) %in% seq)
+      
+      #cat(paste(input$jsValue),sep="\n")
+      
+      #cat(paste(idsss),sep="\n")
+      
+      if(length(idsss) > 0){
 
-      tmpL=PiLib[which(as.character(PiLib$crRNA) %in% seq),]
+      tmpL=PiLib[idsss,]
       
       tmpL=unique(tmpL[,-4])
       tmpL=tmpL[order(tmpL$Well),]
@@ -479,11 +638,12 @@ rownames(wbname)=as.character(wbname[,1])
         
         colnames(Pdata)[3]="Forward primer"
         colnames(Pdata)[4]="Reverse primer"
+        colnames(Pdata)[6]="Guide sequence"
         colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
         
         Pdata
       },server = FALSE, escape = FALSE, selection = 'none')
-      
+      }
       ##Done
       
       })
@@ -561,7 +721,8 @@ rownames(wbname)=as.character(wbname[,1])
           output$DownloadBasket <- renderUI({
             tagList(
           downloadButton('DownBasketTable', 'Download table'),
-          downloadButton('DownBasketApe', 'Download annotated genbank files in bulk')
+          downloadButton('DownBasketApe', 'Download annotated genbank files in bulk'),
+          actionButton("Cleanbasket", label = "Empty basket")
             )
           })
           
@@ -585,6 +746,7 @@ rownames(wbname)=as.character(wbname[,1])
            
         colnames(Pdata)[3]="Forward primer"
         colnames(Pdata)[4]="Reverse primer"
+        colnames(Pdata)[6]="Guide sequence"
         colnames(Pdata)[8]="Annotated oligo sequence (ApE)"
         
         rownames(Pdata)=1:nrow(Pdata)
@@ -606,6 +768,8 @@ rownames(wbname)=as.character(wbname[,1])
         dtt=dtt[-1,]
         ##Change names
         dtt[,5]=as.character(wbname[as.character(dtt[,5]),2])
+        colnames(dtt)[6] = "Guide sequence"
+        
         fname = paste(UserPath,"Basket.tsv",sep="")
         write.table(x=dtt,fname,row.names=F,sep="\t")
         
@@ -638,6 +802,14 @@ rownames(wbname)=as.character(wbname[,1])
       },
       contentType = "application/zip"
     )
+    
+    ##Clean basket
+    ##Add to basket on genome browser
+    observeEvent(input$Cleanbasket, {
+      rv$basket <- data.frame(Plate = c(""), Well = c(""), PrimerFwd=c(""), PrimerRev=c(""), Target=c(""),crRNA=c(""), Type=c(""), Oligo=c(""), stringsAsFactors=F) 
+      rv$counter <- 0
+    })
+    
     
     })  
 

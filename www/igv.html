@@ -78,9 +78,17 @@
 
 
                     });
-                
 
+                    // Function to keep track of where the user is
+                    //browser.on('locuschange', function (referenceFrame) {
+                     //   Shiny.onInputChange("locationIGV", referenceFrame.label);
+                        //Shiny.onInputChange("locationIGV", 'Hola');
+                    //});
 
+                    browser.on('locuschange', function (referenceFrameList) {
+                        let loc = referenceFrameList.map(rf => rf.getLocusString()).join('%20');
+                        Shiny.onInputChange("locationIGV", loc);
+                    });
 
                 });
 

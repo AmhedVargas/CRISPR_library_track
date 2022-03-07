@@ -59,31 +59,32 @@ shinyUI(
         id = "panels",
         
         tabPanel("Query",
-                 mainPanel(
+                 fluidRow(
                      h2("Search for gene targets"),
-                     tabsetPanel(
-                         tabPanel("Simple search",
-                                  br(),
-                                  ##Basic search text
-                                  textAreaInput("geneinput", label = "Target gene", value = "", resize="none", placeholder= "Wormbase ID, transcript or gene name", rows=1),
-                                  ##Basic search button
-                                  actionButton("actiongenesearch", label = "Search"),
-                                  hr(),
-                                  ##Error in case something fails
-                                  verbatimTextOutput("ErrorMessage"),
-                                  verbatimTextOutput("SimpleFragment"),
-                                  ##Basic table
-                                  DT::dataTableOutput('SelPiTab'),
-                                  htmlOutput("SelPiTabSummary"),
-                                  uiOutput("extraoui")
-                         ),
+                     #tabsetPanel(
+                        # tabPanel("Simple search",
+                        #          br(),
+                        #          ##Basic search text
+                        #          textAreaInput("geneinput", label = "Target gene", value = "", resize="none", placeholder= "Wormbase ID, transcript or gene name", rows=1),
+                        #          ##Basic search button
+                        #          actionButton("actiongenesearch", label = "Search"),
+                        #          hr(),
+                        #          ##Error in case something fails
+                        #          verbatimTextOutput("ErrorMessage"),
+                        #          verbatimTextOutput("SimpleFragment"),
+                        #          ##Basic table
+                        #          DT::dataTableOutput('SelPiTab'),
+                        #          htmlOutput("SelPiTabSummary"),
+                        #          uiOutput("extraoui")
+                        # ),
                      
-                         tabPanel("Multiple search",
+                         #tabPanel("Multiple search",
+                         tabPanel("Gene search",
                                  br(),
                                  textAreaInput("MultipleGeness", placeholder = "Wormbase IDs, transcript or gene names separated by newlines or commas", label = "List of genes", value = "", cols= 100, rows=5, width = "600px"),
-                                 #selectInput("crRNA_multiplegenes_type", label = HTML("<b>crRNA type</b>"), 
-                                 #            choices = c("All","500 bp promoter", "250 bp promoter", "ATG", "CDS", "Stop"), 
-                                 #            selected = 1),
+                                 selectInput("crRNA_multiplegenes_type", label = HTML("<b>crRNA type (location)</b>"), 
+                                             choices = c("All","500 bp promoter", "250 bp promoter", "ATG", "CDS", "Stop"), 
+                                             selected = 1),
                                  ##Basic search button
                                  actionButton("actionmultiplesearch", label = "Search"),
                                  hr(),
@@ -92,8 +93,8 @@ shinyUI(
                                  ##Basic table
                                  DT::dataTableOutput('crRNAMultipleTab'),
                                  htmlOutput("MultipleExtraoui"),
-                                )
-                     )
+                                 class = "span7")
+                     #)
                      )),
         
         
@@ -113,17 +114,20 @@ shinyUI(
                                  "),
                    htmlOutput("genebrowsearch"),
                   #   ),
-                 hr(),
+                 #hr(),
                  verbatimTextOutput("igv_id"),
                  verbatimTextOutput("ErrorMessageBrowser"),
                  verbatimTextOutput("SimpleFragmentBrowser"),
+                 actionButton("userigvlocation", label = "Display guide sequences seen in browser"),
+                 actionButton("userigvbasket", label = "Send guide sequences seen in browser to basket"),
+                 hr(),
                  ##Basic table
-                 DT::dataTableOutput('SelPiTabBrowser'),
+                 DT::dataTableOutput('SelPiTabBrowser')
                  )),
         
         ##Basket tab
         tabPanel("Basket",
-                 mainPanel(
+                 fluidRow(
                      h3("Download oligos in bulk"),
                      DT::dataTableOutput('BigBasket'),
                      ##Add a conditional panel with rv counter higher than 0 to add download button, alternatively associate that to the value # this option is better so
@@ -133,7 +137,7 @@ shinyUI(
         
         ##Download of tracks
         tabPanel("Downloads",
-                 mainPanel(
+                 fluidRow(
                      h3("Tracks"),
                      
                      HTML("<br>Bed track with crRNA library.
@@ -144,9 +148,20 @@ shinyUI(
 
         ###About
         tabPanel("About",
-                 mainPanel(
-                 h3("The app"),
-                 HTML("<p align=\"justify\">Wormbuilder tracks works as a repository for genomic coordinates of amenabe regions in our <a href=\"https://syngenbio.kaust.edu.sa/Pages/Home.aspx\">lab</a>...Still in development
+                 fluidRow(
+                     HTML("<h3><i>C. elegans</i> crRNA library DB</h3>"),
+                     HTML("<p align=\"justify\">
+                      This website is generated via custom modified css/html code running in R via the shiny library.
+                 <br>All the templates, libraries, and programs used to produce this site are under the MIT and GNU licenses.
+                    <br>The R scripts and files to render this site can be found at <a href=\"https://www.researchgate.net/profile/Amhed_Vargas_Velazquez\">Amhed Missael Vargas Velazquez</a> | <a href=\"https://github.com/AmhedVargas\">Github account</a></p>
+                 This website was designed by MDJ, AMV, and CFJ (ADD link to updated wormbuilder org profiles) from the Laboratory of Synthetic Genome Biology<br>"),
+                 h3("The Laboratory of Synthetic Genome Biology"),
+                 HTML("<p align=\"justify\">
+                 The Laboratory of Synthetic Genome Biology is located in building 2 - level 3 (Ibn Al-Haytham – Above Spine) at King Abdullah University of Science and Technology (KAUST).
+                 <br><i>Contact info</i>:<br>Christian-Froekjaer Jensen, Ph.D. 
+                 <br>Assistant Professor of Bioscience
+                 <br>Laboratory of Synthetic Genome Biology
+                 <br>Email: <a href=\"mailto:cfjensen@kaust.edu.sa\">cfjensen@kaust.edu.sa</a>
                       </p>")
         )
     )),
