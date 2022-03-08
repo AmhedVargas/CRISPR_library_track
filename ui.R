@@ -143,7 +143,7 @@ shinyUI(
                      HTML("<br>Bed track with crRNA library.
                               
                               <p align=\"justify\">
-                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v3.bed\">Download (48 MB)</a><br></p>")
+                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.bed\">Download (45 MB)</a><br></p>")
                      )),
 
         ###About

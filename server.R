@@ -25,7 +25,7 @@ wbname=MainDB[,c("ID","Name2Use")]
 rownames(wbname)=as.character(wbname[,1])
 
 ##crRNA coordinates
-coordcrRNA = read.table("DB/crRNAlib.v3.simplified.bed",sep="\t", header=F, stringsAsFactors=F)
+coordcrRNA = read.table("DB/crRNAlib.simplified.bed",sep="\t", header=F, stringsAsFactors=F)
 colnames(coordcrRNA) = c("chr","midpos","seq")
 
   shinyServer(function(input, output, session) {
