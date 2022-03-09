@@ -140,10 +140,13 @@ shinyUI(
                  fluidRow(
                      h3("Tracks"),
                      
-                     HTML("<br>Bed track with crRNA library.
-                              
+                     HTML("<br>Bed track with crRNA library
                               <p align=\"justify\">
-                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.bed\">Download (45 MB)</a><br></p>")
+                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.bed\">Download (45 MB)</a><br></p>"),
+                     
+                     HTML("<br>BigWig track with AlphaFold confidence scores
+                              <p align=\"justify\">
+                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/AF_confidence.bigwig\">Download (145 MB)</a><br></p>")
                      )),
 
         ###About
