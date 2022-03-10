@@ -4,7 +4,7 @@ Shiny app that allows the exploration and adoption of a large scale CRISPR oligo
 See the app in action [here](https://wormbuilder.dev/crRNALib/). Also, see the [crRNA-DB repository](https://github.com/AmhedVargas/crRNA_library_2021) for more information regarding the creation of crRNA sequences.
 
 ## Structure of the repository
-The shiny app core lies onto two R scripts, the "server.R" and "ui.R" codes, and text-based databases of crRNA oligo sequences (contained within the "DB" folder). While the ui code handles the user queries, the server code computes them and load fragments from the database via the sequence identifier (see below).
+This shiny app is structured into two R scripts, "server.R" and "ui.R", and text-based databases of crRNA oligo sequences (contained within the "DB" folder). While the ui code handles the user queries, the server code computes them and load fragments from the database via the sequence identifier (see below).
 
 ## Dependencies
 **R**
