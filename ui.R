@@ -142,7 +142,7 @@ shinyUI(
                      
                      HTML("<br>Bed track with crRNA library (ce11/WS282)
                               <p align=\"justify\">
-                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.bed\">Download (45 MB)</a><br></p>"),
+                         <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v4.bed\">Download (45.5 MB)</a><br></p>"),
                      
                      HTML("<br>BigWig track with AlphaFold confidence scores (ce11/WS282)
                               <p align=\"justify\">
