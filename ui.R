@@ -54,35 +54,19 @@ shinyUI(
     #Main tab pages
     navbarPage(
         ### Add action links to the tittle of piRNAi app
-        title=actionLink("link_to_tabpanel_title", HTML("<b><i>C. elegans</i> crRNA library</b>")),
-        windowTitle="C. elegans crRNA library",
+        title=actionLink("link_to_tabpanel_title", HTML("<b><i>C. elegans</i> CRISPR-Cas9 library</b>")),
+        windowTitle="C. elegans CRISPR-Cas9 library",
         id = "panels",
         
         tabPanel("Query",
                  fluidRow(
                      h2("Search for gene targets"),
-                     #tabsetPanel(
-                        # tabPanel("Simple search",
-                        #          br(),
-                        #          ##Basic search text
-                        #          textAreaInput("geneinput", label = "Target gene", value = "", resize="none", placeholder= "Wormbase ID, transcript or gene name", rows=1),
-                        #          ##Basic search button
-                        #          actionButton("actiongenesearch", label = "Search"),
-                        #          hr(),
-                        #          ##Error in case something fails
-                        #          verbatimTextOutput("ErrorMessage"),
-                        #          verbatimTextOutput("SimpleFragment"),
-                        #          ##Basic table
-                        #          DT::dataTableOutput('SelPiTab'),
-                        #          htmlOutput("SelPiTabSummary"),
-                        #          uiOutput("extraoui")
-                        # ),
                      
                          #tabPanel("Multiple search",
                          tabPanel("Gene search",
                                  br(),
                                  textAreaInput("MultipleGeness", placeholder = "Wormbase IDs, transcript or gene names separated by newlines or commas", label = "List of genes", value = "", cols= 100, rows=5, width = "600px"),
-                                 selectInput("crRNA_multiplegenes_type", label = HTML("<b>crRNA type (location)</b>"), 
+                                 selectInput("crRNA_multiplegenes_type", label = HTML("<b>Type (location)</b>"), 
                                              choices = c("All","500 bp promoter", "250 bp promoter", "ATG", "CDS", "Stop"), 
                                              selected = 1),
                                  ##Basic search button
@@ -140,7 +124,7 @@ shinyUI(
                  fluidRow(
                      h3("Tracks"),
                      
-                     HTML("<br>Bed track with crRNA library (ce11/WS282)
+                     HTML("<br>Bed track with protospacers (ce11/WS282)
                               <p align=\"justify\">
                          <a href=\"https://s3.eu-central-1.amazonaws.com/wormbuilder.dev/tracks/wormTracks/crRNAlib.v4.bed\">Download (45.5 MB)</a><br></p>"),
                      
@@ -152,24 +136,25 @@ shinyUI(
         ###About
         tabPanel("About",
                  fluidRow(
-                     HTML("<h3><i>C. elegans</i> crRNA library DB</h3>"),
+                     HTML("<h3><i>C. elegans</i> CRISPR-Cas9 library DB</h3>"),
                      HTML("<p align=\"justify\">
                       This website is generated via custom modified css/html code running in R via the shiny library.
                  <br>All the templates, libraries, and programs used to produce this site are under the MIT and GNU licenses.
-                    <br>The R scripts and files to render this site can be found at <a href=\"https://www.researchgate.net/profile/Amhed_Vargas_Velazquez\">Amhed Missael Vargas Velazquez</a> | <a href=\"https://github.com/AmhedVargas\">Github account</a></p>
-                 This website was designed by MDJ, AMV, and CFJ (ADD link to updated wormbuilder org profiles) from the Laboratory of Synthetic Genome Biology<br>"),
+                    <br>The R scripts and files to render this site can be found <a href=\"https://github.com/AmhedVargas/CRISPR_library_track\">here</a></p>
+                 This website was designed by <a href=\"https://scholar.google.com/citations?user=WokAqF8AAAAJ&hl=en&authuser=1\">Mohammed Al-Johani</a> (<a href=\"https://www.linkedin.com/in/mohammedaljohani/\">LinkedIn</a>), <a href=\"https://www.researchgate.net/profile/Amhed_Vargas_Velazquez\">Amhed Missael Vargas Velazquez</a> (<a href=\"https://github.com/AmhedVargas\">Github</a>), and 
+                          <a href=\"https://www.kaust.edu.sa/en/study/faculty/christian-jensen\">Christian Froekjaer-Jensen</a> from the Laboratory of Synthetic Genome Biology<br>"),
                  h3("The Laboratory of Synthetic Genome Biology"),
                  HTML("<p align=\"justify\">
                  The Laboratory of Synthetic Genome Biology is located in building 2 - level 3 (Ibn Al-Haytham – Above Spine) at King Abdullah University of Science and Technology (KAUST).
                  <br><i>Contact info</i>:<br>Christian-Froekjaer Jensen, Ph.D. 
                  <br>Assistant Professor of Bioscience
-                 <br>Laboratory of Synthetic Genome Biology
+                 <br><a href=\"https://wormbuilder.org/laboratory-of-synthetic-genome-biology/\">Laboratory of Synthetic Genome Biology</a>
                  <br>Email: <a href=\"mailto:cfjensen@kaust.edu.sa\">cfjensen@kaust.edu.sa</a>
                       </p>")
         )
     )),
     hr(),
-    HTML("<a href=\"https://syngenbio.kaust.edu.sa/Pages/Home.aspx\">Syntetic genome biology laboratory @KAUST</a><br>"),
+    HTML("<a href=\"https://www.kaust.edu.sa/en/study/faculty/christian-jensen\">Froekjaer-Jensen Lab @KAUST</a><br>"),
     HTML("<a href=\"http://www.wormbuilder.org/\">Wormbuilder</a><br>"),
     HTML("<a href=\"mailto:cfjensen@kaust.edu.sa\">Contact us!</a>")
     
