@@ -141,12 +141,12 @@ shinyUI(
                       This website is generated via custom modified css/html code running in R via the shiny library.
                  <br>All the templates, libraries, and programs used to produce this site are under the MIT and GNU licenses.
                     <br>The R scripts and files to render this site can be found <a href=\"https://github.com/AmhedVargas/CRISPR_library_track\">here</a></p>
-                 This website was designed by <a href=\"https://scholar.google.com/citations?user=WokAqF8AAAAJ&hl=en&authuser=1\">Mohammed Al-Johani</a> (<a href=\"https://www.linkedin.com/in/mohammedaljohani/\">LinkedIn</a>), <a href=\"https://www.researchgate.net/profile/Amhed_Vargas_Velazquez\">Amhed Missael Vargas Velazquez</a> (<a href=\"https://github.com/AmhedVargas\">Github</a>), and 
+                 This website was designed by <a href=\"https://scholar.google.com/citations?user=WokAqF8AAAAJ&hl=en&authuser=1\">Mohammed AlJohani</a> (<a href=\"https://www.linkedin.com/in/mohammedaljohani/\">LinkedIn</a>), <a href=\"https://www.researchgate.net/profile/Amhed_Vargas_Velazquez\">Amhed Missael Vargas Velazquez</a> (<a href=\"https://github.com/AmhedVargas\">Github</a>), and 
                           <a href=\"https://www.kaust.edu.sa/en/study/faculty/christian-jensen\">Christian Froekjaer-Jensen</a> from the Laboratory of Synthetic Genome Biology<br>"),
                  h3("The Laboratory of Synthetic Genome Biology"),
                  HTML("<p align=\"justify\">
                  The Laboratory of Synthetic Genome Biology is located in building 2 - level 3 (Ibn Al-Haytham – Above Spine) at King Abdullah University of Science and Technology (KAUST).
-                 <br><i>Contact info</i>:<br>Christian-Froekjaer Jensen, Ph.D. 
+                 <br><i>Contact info</i>:<br>Christian Froekjaer-Jensen, Ph.D. 
                  <br>Assistant Professor of Bioscience
                  <br><a href=\"https://wormbuilder.org/laboratory-of-synthetic-genome-biology/\">Laboratory of Synthetic Genome Biology</a>
                  <br>Email: <a href=\"mailto:cfjensen@kaust.edu.sa\">cfjensen@kaust.edu.sa</a>

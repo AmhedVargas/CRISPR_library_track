@@ -459,7 +459,7 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
         
         ##Now, filter by type
         if(mytipin != "All"){
-        mycrRNAtypes= as.character(tmpL$Gene)
+        mycrRNAtypes= as.character(tmpL$Type)
         crRNAmatches=grep(mytipin,mycrRNAtypes)
         }else{
           crRNAmatches=1:nrow(tmpL)
@@ -491,10 +491,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
             stringsAsFactors = FALSE
           )
           
-          colnames(Pdata)[3]="Oligo-specific Fwd primer"
-          colnames(Pdata)[4]="Oligo-specific Rev primer"
-		  colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
-          colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
+          colnames(Pdata)[3]="Oligo-specific forward"
+          colnames(Pdata)[4]="Oligo-specific reverse"
+		  colnames(Pdata)[5]="Gene-specific forward (RNP only)"
+          colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
           colnames(Pdata)[8]="Guide sequence"
           colnames(Pdata)[10]="RNP annotated sequence (ApE)"
           colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -595,10 +595,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
           		stringsAsFactors = FALSE
           	)
           	
-          	colnames(Pdata)[3]="Oligo-specific Fwd primer"
-          	colnames(Pdata)[4]="Oligo-specific Rev primer"
-          	colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
-          	colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
+          	colnames(Pdata)[3]="Oligo-specific forward"
+          	colnames(Pdata)[4]="Oligo-specific reverse"
+          	colnames(Pdata)[5]="Gene-specific forward (RNP only)"
+          	colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
           	colnames(Pdata)[8]="Guide sequence"
           	colnames(Pdata)[10]="RNP annotated sequence (ApE)"
           	colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -706,10 +706,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
       		stringsAsFactors = FALSE
       	)
       	
-      	colnames(Pdata)[3]="Oligo-specific Fwd primer"
-      	colnames(Pdata)[4]="Oligo-specific Rev primer"
-      	colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
-      	colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
+      	colnames(Pdata)[3]="Oligo-specific forward"
+      	colnames(Pdata)[4]="Oligo-specific reverse"
+      	colnames(Pdata)[5]="Gene-specific forward (RNP only)"
+      	colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
       	colnames(Pdata)[8]="Guide sequence"
       	colnames(Pdata)[10]="RNP annotated sequence (ApE)"
       	colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -866,10 +866,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
           stringsAsFactors = FALSE
         )
            
-        colnames(Pdata)[3]="Oligo-specific Fwd primer"
-        colnames(Pdata)[4]="Oligo-specific Rev primer"
-        colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
-        colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
+        colnames(Pdata)[3]="Oligo-specific forward"
+        colnames(Pdata)[4]="Oligo-specific reverse"
+        colnames(Pdata)[5]="Gene-specific forward (RNP only)"
+        colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
         colnames(Pdata)[8]="Guide sequence"
         colnames(Pdata)[10]="RNP annotated sequence (ApE)"
         colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -895,7 +895,13 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
         ##Change names
         dtt[,7]=as.character(wbname[as.character(dtt[,7]),2])
         colnames(dtt)[8] = "Guide sequence"
-        
+        colnames(dtt)[3]="Oligo-specific forward"
+          colnames(dtt)[4]="Oligo-specific reverse"
+		  colnames(dtt)[5]="Gene-specific forward (RNP only)"
+          colnames(dtt)[6]="Gene-specific reverse (RNP only)"
+          colnames(dtt)[10]="RNP sequence"
+          colnames(dtt)[11]="DNA sequence"
+		
         fname = paste(UserPath,"Basket.tsv",sep="")
         write.table(x=dtt,fname,row.names=F,sep="\t", quote = F)
         
