@@ -44,88 +44,76 @@ OligoApe = function(sequence, FwdPrimerN, RevPrimerN, crRNASeq, Plate, Well, Tar
 	FileLines=append(FileLines,paste("FEATURES             Location/Qualifiers",sep=""))
 	#Constant info
 	FileLines=append(FileLines,paste("     primer_bind     ","1..20",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","UniF","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","UniF","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#66ffcb","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff2600","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Universal Fwd","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Universal Fwd","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#b7e6d7","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#b7e6d7","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     promoter        ","98..167",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Pol III promoter","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Pol III promoter","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#0f7ffe","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#346ee0","\"",sep=""))
+	FileLines=append(FileLines,paste("     promoter        ","98..168",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","CeN50-2 RNA pol III promoter","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","CeN50-2 RNA pol III promoter","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ffef86","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ffef86","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","43..46",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","GG Overhang","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","GG Overhang","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ffd478","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ffd478","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","255..258",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","GG Overhang(1)","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","GG Overhang","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ffd478","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ffd478","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","188..210",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","crRNA scaffold + Term","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","crRNA scaffold + Term","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#fc6fce","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","crRNA scaffold + term","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","crRNA scaffold + term","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff9ccd","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff9ccd","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","169..187",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Spacer","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Spacer","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#7980ff","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Protospacer","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Protospacer","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#c7b0e3","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#c7b0e3","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","211..254",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Left Homology","\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Left Homology","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#75d5ff","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#85dae9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#85dae9","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","47..90",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","47..91",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Right Homology","\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Right Homology","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#75d5ff","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#85dae9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#85dae9","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     primer_bind     ","complement(281..300)",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","UniR","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","UniR","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#14c0bd","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff7d78","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Universal Rev","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Universal Rev","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff0000","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff0000","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","260..265",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","BsaI","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","BsaI","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#fefc78","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","255..265",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","BsaI GG2","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","BsaI GG2","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#f8d3a9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#f8d3a9","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","36..41",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","BsaI(1)","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","BsaI","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#fefc78","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","36..46",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","BsaI GG1","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","BsaI GG1","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#f8d3a9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#f8d3a9","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","92..97",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","XbaI","\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","XbaI","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#f1b1b4","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","green","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#9eafd2","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#9eafd2","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     primer_bind     ","complement(266..280)",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",RevPrimerN,"\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",RevPrimerN,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#7ffe07","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#fb0106","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#f58a5e","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#f58a5e","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     primer_bind     ","21..35",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",FwdPrimerN,"\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",FwdPrimerN,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#21fe80","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#fb0106","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#75c6a9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#75c6a9","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0\"",sep=""))
 	
 	##Origin and sequence
@@ -180,81 +168,90 @@ RBPOligoApe = function(sequence, GeneFwdPrimer, GeneRevPrimer, OligoFwdPrimer, O
 	#Start
 	FileLines=append(FileLines,paste("FEATURES             Location/Qualifiers",sep=""))
 	#Constant info
-	FileLines=append(FileLines,paste("     primer_bind     ","89..107",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/PCR_conditions=","\"","primer sequence:TAATACGACTCACTATAGG","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","T7 Promoter (including GG)","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","T7 Promoter (including GG)","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","T7 Promoter (including GG)","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#FFED7A","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#012ca2","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","complement(266..280)",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Gene-specific Reverse","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",GeneRevPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",GeneRevPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff2600","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff2600","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","complement(251..265)",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Oligo-specific Reverse","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",OligoRevPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",OligoRevPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff9393","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff9393","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     misc_feature    ","36..50",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Oligo-specific Forward","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",OligoFwdPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",OligoFwdPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#00f900","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#00f900","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","1..20",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Universal Fwd","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","Universal Fwd","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Universal Fwd","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#b7e6d7","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#b7e6d7","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","21..35",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Gene-specific Forward","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",GeneFwdPrimer,"\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",GeneFwdPrimer,"\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",GeneFwdPrimer,"\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#d4fb78","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#d4fb78","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     primer_bind     ","127..206",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/PCR_conditions=","\"","primer sequence:GTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGCTTTT","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","sgRNA Scaffold","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","sgRNA Scaffold","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","sgRNA Scaffold","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#F3A7F7","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#c04829","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#85dae9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#85dae9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","36..50",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",OligoFwdPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",OligoFwdPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",OligoFwdPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#75c6a9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#75c6a9","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","51..88",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#84b0dc","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#84b0dc","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","89..107",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","T7 RNA pol promoter","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","T7 RNA pol promoter","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","T7 RNA pol promoter","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ffef86","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ffef86","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
 	FileLines=append(FileLines,paste("     misc_feature    ","108..126",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","spacer","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","spacer","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","spacer","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#0096ff","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#0096ff","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     primer_bind     ","206..211",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/PCR_conditions=","\"","primer sequence:TCTAGA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Protospacer","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","Protospacer","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Protospacer","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#c7b0e3","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#c7b0e3","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","127..205",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","sgRNA scaffold","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","sgRNA scaffold","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","sgRNA Scaffold","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff9ccd","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff9ccd","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","206..211",sep=""))
 	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","XbaI","\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","XbaI","\"",sep="",collapse=""),sep="     "))
 	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","XbaI","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ADB2FD","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#9eafd2","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#9eafd2","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","212..250",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Random DNA","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#84b0dc","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#84b0dc","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","complement(251..265)",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",OligoRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",OligoRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",OligoRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#f58a5e","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#f58a5e","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","complement(266..280)",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"",GeneRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"",GeneRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"",GeneRevPrimer,"\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#faac61","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#faac61","\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("     misc_feature    ","complement(281..300)",sep=""))
+	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","Universal Rev","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","Universal Rev","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","Universal Rev","\"",sep="",collapse=""),sep="     "))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#ff0000","\"",sep=""))
 	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#ff0000","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     primer_bind     ","1..20",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/PCR_conditions=","\"","primer sequence:CTCACCGCTCTTGTAGCATG","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","UniversalForward","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","UniversalForward","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","UniversalForward","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#359245","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#db2626","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
-	FileLines=append(FileLines,paste("     primer_bind     ","complement(281..300)",sep=""))
-	FileLines=append(FileLines,paste("                     ",paste("/PCR_conditions=","\"","primer sequence:GACCGGCAATCTCTTCCTGG","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/locus_tag=","\"","UniversalReverse","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/label=","\"","UniversalReverse","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ",paste("/ApEinfo_label=","\"","UniversalReverse","\"",sep="",collapse=""),sep="     "))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_fwdcolor=\"","#359245","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_revcolor=\"","#db2626","\"",sep=""))
-	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0 -0.5} {} 0} width 5 offset 0\"",sep=""))
+	FileLines=append(FileLines,paste("                     ","/ApEinfo_graphicformat=\"arrow_data {{0 0.5 0 1 2 0 0 -1 0-0.5} {0 .5 .1 .5 .1 -.5 0 -.5} 0} width 5 offset 0\"",sep=""))
 	##Origin and sequence
 	FileLines=append(FileLines,paste("ORIGIN"))
 	
@@ -391,7 +388,6 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
       
       wbidsIN=c()
       wbidsOut=c()
-      oriris=c()
       
       ##Genes
       mygenes = as.character(input$MultipleGeness)
@@ -406,18 +402,15 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
         for(mygene in mygenes){
           
           if(mygene != ""){
-          if(mygene %in% as.character(MainDB$ID)){
-            wbidsIN=append(wbidsIN,as.character(MainDB[which(as.character(MainDB$ID)==mygene)[1],1]))
-            oriris=append(oriris,mygene)
+          if(toupper(mygene) %in% toupper(as.character(MainDB$ID))){
+            wbidsIN=append(wbidsIN,as.character(MainDB[which(toupper(as.character(MainDB$ID)) == toupper(mygene))[1],1]))
           }else{
-            if(mygene %in% as.character(MainDB$Locus)){
-              wbidsIN=append(wbidsIN,as.character(MainDB[which(as.character(MainDB$Locus)==mygene)[1],1]))
-              oriris=append(oriris,mygene)
+            if(toupper(mygene) %in% toupper(as.character(MainDB$Locus))){
+              wbidsIN=append(wbidsIN,as.character(MainDB[which(toupper(as.character(MainDB$Locus))==toupper(mygene))[1],1]))
             }else{
               
-              if(mygene %in% as.character(MainDB$Transcript)){
-                wbidsIN=append(wbidsIN,as.character(MainDB[which(as.character(MainDB$Transcript)==mygene)[1],1]))
-                oriris=append(oriris,mygene)
+              if(toupper(mygene) %in% toupper(as.character(MainDB$Transcript))){
+                wbidsIN=append(wbidsIN,as.character(MainDB[which(toupper(as.character(MainDB$Transcript))==toupper(mygene))[1],1]))
               }else{
                 wbidsOut=append(wbidsOut,mygene)
                 }
@@ -441,13 +434,11 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
         }
         
         tmpT=PiLib[which(as.character(PiLib$Gene) %in% wbidsIN[1]),]
-        #tmpT$Gene = rep(oriris[1],nrow(tmpT))
         
         tmpL = tmpT
         if(length(wbidsIN) > 1){
         for(q in 2:length(wbidsIN)){
           tmpT=PiLib[which(as.character(PiLib$Gene) %in% wbidsIN[q]),]
-          #tmpT$Gene = rep(oriris[q],nrow(tmpT))
           tmpL=rbind(tmpL,tmpT)
           }
         
@@ -491,10 +482,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
             stringsAsFactors = FALSE
           )
           
-          colnames(Pdata)[3]="Oligo-specific forward"
-          colnames(Pdata)[4]="Oligo-specific reverse"
-		  colnames(Pdata)[5]="Gene-specific forward (RNP only)"
-          colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
+          colnames(Pdata)[3]="Oligo-specific Fwd primer"
+          colnames(Pdata)[4]="Oligo-specific Rev primer"
+		  colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
+          colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
           colnames(Pdata)[8]="Guide sequence"
           colnames(Pdata)[10]="RNP annotated sequence (ApE)"
           colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -595,10 +586,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
           		stringsAsFactors = FALSE
           	)
           	
-          	colnames(Pdata)[3]="Oligo-specific forward"
-          	colnames(Pdata)[4]="Oligo-specific reverse"
-          	colnames(Pdata)[5]="Gene-specific forward (RNP only)"
-          	colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
+          	colnames(Pdata)[3]="Oligo-specific Fwd primer"
+          	colnames(Pdata)[4]="Oligo-specific Rev primer"
+          	colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
+          	colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
           	colnames(Pdata)[8]="Guide sequence"
           	colnames(Pdata)[10]="RNP annotated sequence (ApE)"
           	colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -706,10 +697,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
       		stringsAsFactors = FALSE
       	)
       	
-      	colnames(Pdata)[3]="Oligo-specific forward"
-      	colnames(Pdata)[4]="Oligo-specific reverse"
-      	colnames(Pdata)[5]="Gene-specific forward (RNP only)"
-      	colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
+      	colnames(Pdata)[3]="Oligo-specific Fwd primer"
+      	colnames(Pdata)[4]="Oligo-specific Rev primer"
+      	colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
+      	colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
       	colnames(Pdata)[8]="Guide sequence"
       	colnames(Pdata)[10]="RNP annotated sequence (ApE)"
       	colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -866,10 +857,10 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
           stringsAsFactors = FALSE
         )
            
-        colnames(Pdata)[3]="Oligo-specific forward"
-        colnames(Pdata)[4]="Oligo-specific reverse"
-        colnames(Pdata)[5]="Gene-specific forward (RNP only)"
-        colnames(Pdata)[6]="Gene-specific reverse (RNP only)"
+        colnames(Pdata)[3]="Oligo-specific Fwd primer"
+        colnames(Pdata)[4]="Oligo-specific Rev primer"
+        colnames(Pdata)[5]="Gene-specific Fwd primer (RNP only)"
+        colnames(Pdata)[6]="Gene-specific Rev primer (RNP only)"
         colnames(Pdata)[8]="Guide sequence"
         colnames(Pdata)[10]="RNP annotated sequence (ApE)"
         colnames(Pdata)[11]="DNA annotated sequence (ApE)"
@@ -895,13 +886,8 @@ colnames(coordcrRNA) = c("chr","midpos","seq")
         ##Change names
         dtt[,7]=as.character(wbname[as.character(dtt[,7]),2])
         colnames(dtt)[8] = "Guide sequence"
-        colnames(dtt)[3]="Oligo-specific forward"
-          colnames(dtt)[4]="Oligo-specific reverse"
-		  colnames(dtt)[5]="Gene-specific forward (RNP only)"
-          colnames(dtt)[6]="Gene-specific reverse (RNP only)"
-          colnames(dtt)[10]="RNP sequence"
-          colnames(dtt)[11]="DNA sequence"
-		
+        
+        dtt=dtt[,c(1:9,11,10)]
         fname = paste(UserPath,"Basket.tsv",sep="")
         write.table(x=dtt,fname,row.names=F,sep="\t", quote = F)
         
